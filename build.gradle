@@ -1,57 +1,55 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.3.6'
-	id 'io.spring.dependency-management' version '1.1.6'
+    id 'java'
+    id 'org.springframework.boot' version '3.3.6'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
 group = 'bizwiz'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven {
-		url 'https://jitpack.io'
-	}
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
+
 dependencies {
-	// QueryDsl (1/2)
-	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
-	implementation 'com.mysql:mysql-connector-j:8.2.0'
-	implementation 'com.zaxxer:HikariCP:3.4.5'
+    // QueryDsl (1/2)
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
+    implementation 'com.mysql:mysql-connector-j:8.2.0'
+    implementation 'com.zaxxer:HikariCP:3.4.5'
 
-	implementation 'com.github.User:Repo:Tag'
-	//jasypt
-	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+    //jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-	systemProperty "jasypt.encryptor.password", project.getProperties().get("jasypt.encryptor.password")
+    useJUnitPlatform()
+    systemProperty "jasypt.encryptor.password", project.getProperties().get("jasypt.encryptor.password")
 }
 
 //Querydsl(3/3)
