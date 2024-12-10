@@ -1,6 +1,5 @@
 package bizwiz.intranet.common.config;
 import org.jasypt.encryption.StringEncryptor;
-import com.querydsl.core.annotations.Config;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.beans.factory.annotation.Value;
