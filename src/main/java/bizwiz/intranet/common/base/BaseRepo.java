@@ -1,4 +1,4 @@
-package bizwiz.intranet.domain.repo;
+package bizwiz.intranet.common.base;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

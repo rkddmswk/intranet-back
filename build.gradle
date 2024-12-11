@@ -32,11 +32,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
-    implementation 'com.mysql:mysql-connector-j:8.2.0'
     implementation 'com.zaxxer:HikariCP:3.4.5'
 
     //jasypt
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+    //JPA에서 nativequery의 결과를 dto로 매핑해주는 라이브러리
+    implementation 'ch.simas.qlrm:qlrm:1.7.1'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

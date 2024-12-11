@@ -5,24 +5,28 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ENC(Ulzo5eCpnTaC3EDb74jHuHQ4bZt5/jWoqmr9zDvRK41nwGM//z8r7Ut1DIqGOv4htr0Ph1hvJaTWbpYYGbpXeR5nsTfYIiWBAPjj+faZ+oirYmryKF55FpBfrPshV8fKL6M7IHYQW9haL80cBn1zCC1gQJKYuXn6+tjXaE9wtCsnPE/2UwHhZIuHtBb9L0nySTLf7WJTFs3feHDP6TIToKSO3B2doRfcEzKomYfUsh/QpUg/PtcbvMAAMHTQ5NSy)
+    url: ENC(ndw17SsIx2OUN9mEESxO7b3oEM/rXaaZgWjOt4KFXpbemUFBOSkZxWutjUNrV0C0KxaNWPNL1SeSEXC8HwVcyJGRLVBOG2oiTjD3KjuHDeQQyxUC1HxLcmzJzxVL2K1gxR3hUG2rFZM=)
     username: ENC(HoGt7dUuSI3OXlqWG5c/7Q==)
     password: ENC(AYg2AqtTFFjld89z21bghxogHpzsZfBl)
+    driver-class-name: org.mariadb.jdbc.Driver
+
 
 logging:
   level:
-    root: info
+    root: debug
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
         format_sql: true
         show_sql: true
         ddl-auto: update
         jdbc:
           time_zone: Asia/Seoul
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
 jasypt:
   encryptor:
