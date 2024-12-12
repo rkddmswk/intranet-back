@@ -2,7 +2,6 @@ package bizwiz.intranet.dto.user;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -28,8 +27,8 @@ public class UserDto {
     private String memo;
     private String delYn;
     private String regId;
-    private Timestamp regDate;
+    private LocalDateTime regDate;
     private String updateId;
-    private Timestamp updateDate;
+    private LocalDateTime updateDate;
 
 }

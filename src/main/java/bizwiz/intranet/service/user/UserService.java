@@ -4,6 +4,7 @@ package bizwiz.intranet.service.user;
 import bizwiz.intranet.domain.entity.user.UserEntity;
 import bizwiz.intranet.domain.repo.UserRepo;
 import bizwiz.intranet.dto.user.UserDto;
+import bizwiz.intranet.service.EncryptionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
 
+    private final EncryptionService encryptionService;
+
     private final UserRepo userRepo;
 
-    public boolean setUserTest(List<UserDto> dto) {
+    public void setUserTest(List<UserDto> dto) {
 
         List<UserEntity> list = new ArrayList<>();
 
         try {
             for (UserDto data : dto) {
+
+                String userPw = encryptionService.encrypt(data.getUserPw());
+                String email = encryptionService.encrypt(data.getEmail());
+
                 UserEntity userEntity = UserEntity.builder()
                         .userID(data.getUserID())
                         .userNum(data.getUserNum())
@@ -32,9 +39,9 @@ public class UserService {
                         .teamID(data.getTeamID())
                         .positionID(data.getPositionID())
                         .roleID(data.getRoleID())
-                        .userPw(data.getUserPw())
+                        .userPw(userPw)
                         .name(data.getName())
-                        .email(data.getEmail())
+                        .email(email)
                         .privateEmail(data.getPrivateEmail())
                         .telephone(data.getTelephone())
                         .phoneNumber(data.getPhoneNumber())
@@ -56,8 +63,10 @@ public class UserService {
             throw e;
         }
 
-        return true;
     }
 
+    public List<UserDto> getUserInfo() {
+        return userRepo.findUserInfo();
+    }
 
 }

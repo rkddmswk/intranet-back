@@ -28,6 +28,12 @@ logging:
           implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
+resource:
+  jwt:
+    access-token-limit: 7200000
+    refresh-token-limit: 108000000
+    secret: ENC(si6wusao42AjX54zvJlSlt9Sa25PMe5R)
+
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
