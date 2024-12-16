@@ -1,6 +1,7 @@
 package bizwiz.intranet.utils;
 
 import bizwiz.intranet.domain.repo.RefreshTokenRepo;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -47,7 +48,7 @@ public class JwtUtil {
                 .setSubject(userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpirationTime))
-                .signWith(SignatureAlgorithm.HS256, getSecretKey())
+                .signWith(getSecretKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
     public String generateRefreshToken(String userId) {
@@ -56,9 +57,26 @@ public class JwtUtil {
                 .setSubject(userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpirationTime))
-                .signWith(SignatureAlgorithm.HS256, getSecretKey())
+                .signWith(getSecretKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
+    public String extractUserId(String token) {
+        return extractClaims(token).getSubject();
+    }
+
+    public boolean isTokenValid(String token, String userID) {
+        String tokenUserID = extractUserId(token);
+        return (tokenUserID.equals(userID) && !isTokenExpired(token));
+    }
+
+    private Claims extractClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token).getBody();
+    }
+
+    private boolean isTokenExpired(String token) {
+        final Date expiration = extractClaims(token).getExpiration();
+        return expiration.before(new Date());
+    }
 
 }

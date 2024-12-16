@@ -5,11 +5,13 @@ import bizwiz.intranet.dto.user.UserDto;
 import bizwiz.intranet.service.user.UserService;
 import bizwiz.intranet.utils.ResponseUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -32,6 +34,8 @@ public class TestController {
 
     @PostMapping("/save")
     public ResponseEntity<ResponseResult> setUserInfo(@RequestBody List<UserDto> dto) {
+
+        log.info("dto ::: {} ", dto);
 
         userService.setUserTest(dto);
         return ResponseUtils.ConvertResponse();

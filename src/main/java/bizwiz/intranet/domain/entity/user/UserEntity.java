@@ -24,6 +24,12 @@ public class UserEntity extends BaseEntity {
     @Column(name = "userNum", length = 8, unique = true)
     private String userNum;
 
+    @Column(name = "userName")
+    private String userName;
+
+    @Column(name = "companyID")
+    private Integer companyID;
+
     @Column(name = "organizationID")
     private Integer organizationID;
 

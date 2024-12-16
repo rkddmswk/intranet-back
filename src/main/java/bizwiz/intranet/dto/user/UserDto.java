@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 public class UserDto {
     private Integer userID;
     private String userNum;
+    private String userName;
+    private Integer companyID;
     private Integer organizationID;
     private Integer teamID;
     private Integer positionID;
