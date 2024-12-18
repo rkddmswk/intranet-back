@@ -29,6 +29,17 @@ public class SecurityConfig {
     };
 
     @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화 (선택 사항)
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // 모든 요청 허용
+                );
+
+        return http.build();
+    }
+
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
@@ -38,7 +49,7 @@ public class SecurityConfig {
                 "http://localhost:5174"
         ));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        corsConfiguration.setExposedHeaders(Arrays.asList("Authorization", "access-token", "Refresh-Token" ));
+        corsConfiguration.setExposedHeaders(Arrays.asList("Authorization", "access-token", "refresh-token" ));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**" ,corsConfiguration);
 
@@ -60,14 +71,4 @@ public class SecurityConfig {
         return (web) -> web.ignoring().requestMatchers(AUTH_WHITELIST);
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화 (선택 사항)
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // 모든 요청 허용
-                );
-
-        return http.build();
-    }
 }

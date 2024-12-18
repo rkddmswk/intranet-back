@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                         )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("Authorization", "Cache-Control", "Content-Type")
-                .exposedHeaders("Authorization", "access-token", "Refresh-Token");
+                .exposedHeaders("Authorization", "access-Token", "refresh-token");
     }
 
 }
