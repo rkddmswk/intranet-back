@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -56,6 +57,13 @@ public class UserService {
                         .userImg(data.getUserImg())
                         .joinDate(data.getJoinDate())
                         .memo(data.getMemo())
+                        .phoneVisibleYn(Optional.ofNullable(data.getPhoneVisibleYn()).orElse("Y"))
+                        .emailVisibleYn(Optional.ofNullable(data.getEmailVisibleYn()).orElse("Y"))
+                        .userNumVisibleYn(Optional.ofNullable(data.getUserNumVisibleYn()).orElse("Y"))
+                        .joinDateVisibleYn(Optional.ofNullable(data.getJoinDateVisibleYn()).orElse("Y"))
+                        .birthdayVisibleYn(Optional.ofNullable(data.getBirthdayVisibleYn()).orElse("Y"))
+                        .addressVisibleYn(Optional.ofNullable(data.getAddressVisibleYn()).orElse("Y"))
+                        .memoVisibleYn(Optional.ofNullable(data.getMemoVisibleYn()).orElse("Y"))
                         .build();
 
                 list.add(userEntity);

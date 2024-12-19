@@ -76,5 +76,10 @@ tasks.named('test') {
     systemProperty "jasypt.encryptor.password", project.getProperties().get("jasypt.encryptor.password")
 }
 
+bootRun {
+    jvmArgs = ['-Djasypt.encryptor.password=' + System.getenv('JASYPT_KEY')]
+}
+
+
 //Querydsl(3/3)
 def querydslDir = "src/main/generated"

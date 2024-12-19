@@ -78,4 +78,25 @@ public class UserEntity extends BaseEntity {
     @Column(name = "memo", length = 255)
     private String memo;
 
+    @Column(name = "phoneVisibleYn")
+    private String phoneVisibleYn;
+
+    @Column(name = "emailVisibleYn")
+    private String emailVisibleYn;
+
+    @Column(name = "userNumVisibleYn")
+    private String userNumVisibleYn;
+
+    @Column(name = "joinDateVisibleYn")
+    private String joinDateVisibleYn;
+
+    @Column(name = "birthdayVisibleYn")
+    private String birthdayVisibleYn;
+
+    @Column(name = "addressVisibleYn")
+    private String addressVisibleYn;
+
+    @Column(name = "memoVisibleYn")
+    private String memoVisibleYn;
+
 }

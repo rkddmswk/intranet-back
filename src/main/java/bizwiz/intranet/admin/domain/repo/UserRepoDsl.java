@@ -11,4 +11,6 @@ public interface UserRepoDsl {
 
     Optional<UserDto> findByUserId(String userID, String userPw);
 
+    //Integer findLastUserNum(Integer companyID);
+
 }

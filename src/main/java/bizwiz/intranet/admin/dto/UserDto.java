@@ -32,5 +32,11 @@ public class UserDto {
     private LocalDateTime regDate;
     private String updateId;
     private LocalDateTime updateDate;
-
+    private String phoneVisibleYn;
+    private String emailVisibleYn;
+    private String userNumVisibleYn;
+    private String joinDateVisibleYn;
+    private String birthdayVisibleYn;
+    private String addressVisibleYn;
+    private String memoVisibleYn;
 }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xmlbeans.soap.SOAPArrayType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -34,6 +35,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         log.info("토큰 체크");
         accessToken = accessToken.replace("Bearer ", "");
         String userId = jwtUtil.extractUserId(accessToken);
+
+
         if (!jwtUtil.isTokenValid(accessToken, userId)) {
             throw new AuthenticationException("토큰 만료. 다시 로그인해 주세요.");
         }

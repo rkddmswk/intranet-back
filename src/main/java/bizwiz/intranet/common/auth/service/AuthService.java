@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -38,9 +38,19 @@ public class AuthService {
 
     @Transactional
     public TokenDto loginUser(LoginDto dto) {
+
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(dto.getUserID());
+
+        if (!matcher.find()) {
+            throw new UserIdPasswordMismatchException("이메일 형식이 올바르지 않습니다..");
+        }
+
+        String userId = dto.getUserID().substring(0, dto.getUserID().indexOf("@"));
         String userPw = dto.getUserPw();
 
-        Optional<UserDto> userDto = userRepo.findByUserId(dto.getUserID(), dto.getUserPw());
+        Optional<UserDto> userDto = userRepo.findByUserId(userId, dto.getUserPw());
         userDto.orElseThrow(() ->
                 new UserIdPasswordMismatchException("존재하지 않는 아이디 입니다")
                 );
@@ -51,14 +61,14 @@ public class AuthService {
             throw new UserIdPasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
 
-        refreshTokenRepo.deleteByUserID(dto.getUserID());
+        refreshTokenRepo.deleteByUserID(userId);
 
-        String accessToken = jwtUtil.generateAccessToken(dto.getUserID());
-        String refreshToken = jwtUtil.generateRefreshToken(dto.getUserID());
+        String accessToken = jwtUtil.generateAccessToken(userId);
+        String refreshToken = jwtUtil.generateRefreshToken(userId);
         LocalDateTime refreshTokenExpire = LocalDateTime.now().plusDays(7);
 
         RefreshTokenEntity refreshTokenEntity = RefreshTokenEntity.builder()
-                .userId(dto.getUserID())
+                .userId(userId)
                 .refreshToken(refreshToken)
                 .expireDate(refreshTokenExpire)
                 .build();

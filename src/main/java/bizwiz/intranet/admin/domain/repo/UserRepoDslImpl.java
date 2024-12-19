@@ -63,4 +63,12 @@ public class UserRepoDslImpl extends BaseRepo implements UserRepoDsl {
                 .where(userEntity.userID.eq(userID))
                 .fetchOne());
     }
+
+/*    @Override
+    public Integer findLastUserNum(Integer companyID) {
+        return jpaQueryFactory.select(
+                Projections.fields(
+
+                        , ));
+    }*/
 }
